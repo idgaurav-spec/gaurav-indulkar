@@ -210,31 +210,68 @@
 	                                        <!--COUNTING NUMBERS ANIMATION BEGINS HERE-->
 
 	   <!--SOME ADDITIONAL DETAILS #1-->
-		<div id="details" class="flex items-center justify-center bg-gradient-to-r from-rose-50 via-sky-50 to-teal-50">
-			<div class="flex flex-col lg:flex-row p-4 space-x-4 max-w-7xl justify-around w-full lg:h-60 items-center ">
-				<!--<div class="h-40 w-[70%] md:w-1/4 flex items-center justify-center  text-3xl text-green-900 font-semi-bold">“No one is watching out for your professional growth except you!”</div>-->
-				<div class="h-40 w-[70%] md:w-1/4 flex items-center justify-center">
-					<div class="flex-col space-y-2">
-						<div class="text-5xl text-green-900 font-bold">3 yr</div>
-						<div class="text-l font-medium text-gray-600">Working in Learning and Development team for 3 years.</div>
-					</div>
-				</div>
-				<div class="h-40 w-[70%] md:w-1/4 flex items-center justify-center">
-					<div class="flex-col space-y-2">
-						<div class="text-5xl text-green-900 font-bold">500+</div>
-						<div class="text-l font-medium text-gray-600">Created 500+ Learning Materials for the Audience.</div>
-					</div>
-				</div>
-				<div class="h-40 w-[70%] md:w-1/4 flex items-center justify-center">
-					<div class="flex-col space-y-2">
-						<div class="text-5xl text-green-900 font-bold">200+</div>
-						<div class="text-l font-medium text-gray-600">Have Successfuly Delivered 200+ E-Learning Courses in Past 3 Years.</div>
-					</div>
-				</div>
-				
-			</div>
-	
-		</div>
+		div id="details" class="flex items-center justify-center bg-gradient-to-r from-rose-50 via-sky-50 to-teal-50">
+    <div class="flex flex-col lg:flex-row p-4 space-x-4 max-w-7xl justify-around w-full lg:h-60 items-center">
+      
+      <div class="h-40 w-[70%] md:w-1/4 flex items-center justify-center">
+        <div class="flex-col space-y-2 text-center">
+          <div id="counter1" class="text-5xl text-green-900 font-bold" data-target="4">0</div>
+          <div class="text-l font-medium text-gray-600">I have been working in the Learning and Development team for the past four years.</div>
+        </div>
+      </div>
+
+      <div class="h-40 w-[70%] md:w-1/4 flex items-center justify-center">
+        <div class="flex-col space-y-2 text-center">
+          <div id="counter2" class="text-5xl text-green-900 font-bold" data-target="500">0</div>
+          <div class="text-l font-medium text-gray-600">Developed over 500+ learning materials for diverse audiences.</div>
+        </div>
+      </div>
+
+      <div class="h-40 w-[70%] md:w-1/4 flex items-center justify-center">
+        <div class="flex-col space-y-2 text-center">
+          <div id="counter3" class="text-5xl text-green-900 font-bold" data-target="500">0</div>
+          <div class="text-l font-medium text-gray-600">Successfully delivered over 500+ e-learning courses in the past four years.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ANIMATION SCRIPT -->
+  <script>
+    function animateValue(obj, start, end, duration) {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        obj.innerText = Math.floor(progress * (end - start) + start);
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          if (end >= 500) obj.innerText = end + "+"; // Add "+" if needed
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    const counters = document.querySelectorAll('[id^="counter"]');
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.getAttribute('data-target'));
+          animateValue(el, 0, target, 1500);
+          observer.unobserve(el); // Only animate once
+        }
+      });
+    }, {
+      threshold: 0.6
+    });
+
+    counters.forEach(counter => {
+      observer.observe(counter);
+    });
+  </script>
 		<script src="https://cdn.tailwindcss.com"></script>
 
 
@@ -260,7 +297,7 @@
 				  <h2 class="text-green-900 text-lg title-font font-medium"><b>Instructional Design</b></h2>
 				</div>
 				<div class="flex-grow">
-				  <p class="leading-relaxed text-base">As an Instructional Designer, I specialize in creating engaging and effective learning experiences that cater to diverse audiences.I design instructional materials that optimize learner engagement and knowledge. Ensuring that learners not only acquire knowledge but also develop the skills they need to succeed in their respective fields.</p>
+				  <p class="leading-relaxed text-base">As an Instructional Designer, I specialize in creating engaging and effective learning experiences that cater to diverse audiences. I design instructional materials that maximise learner engagement & knowledge. Ensuring that learners not only acquire knowledge but also develop the skills they need to succeed in their respective fields.</p>
 				  <div id="rectangle01" class="box-content mx-auto md:box-content ...">
 				  </div>
 				  </a>
@@ -333,7 +370,7 @@
 			 <!-- <br class="hidden lg:inline-block">my creative abilities</span></b>-->
 			</h1><br>
 			<!--<p class="mb-8 leading-relaxed">A young man who enjoys learning about new technologies and developing visually appealing and engaging learning materials. In order to meet your business's processes and requirements. Experience <b> Instructional Designer & E-Learning Developer</b>, working in L & D Team for 3 years. and have created multiple learning materials for the audiance.</p>-->
-			<p class="mb-8 leading-relaxed">As a dedicated and innovative Instructional Designer with three years of experience, I, have a proven track record of creating engaging, effective, and impactful learning experiences. My journey in the field of Instructional Design has been marked by a commitment to leveraging the latest educational technologies and methodologies to enhance learning engagement and knowledge retention.</p>
+			<p class="mb-8 leading-relaxed">As a dedicated and innovative Instructional Designer & E learning Developer with four plus years of experience, I, have a proven track record of creating engaging, effective, & impactful learning experiences. My journey in the field of Instructional Design & E-Learning Development has been marked by a commitment to leveraging the latest educational technologies and methodologies to enhance learning engagement and knowledge retention.</p>
 			<p class="mb-8 leading-relaxed"><b>Professional Experience</b> <br> Over the past 3 years, I have successfully designed and developed a wide range of Instructional materials for a diverse range of audiences. My expertise includes.</p>
 			<ul id="list">
 				<li><b>E-learning Design & Development:</b> Utilizing various e-learning authoring tools to create interactive and multimedia-rich courses that cater to different learning styles.</li>
